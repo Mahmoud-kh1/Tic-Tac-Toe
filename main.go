@@ -34,7 +34,6 @@ func (b *Board) String() string {
 		for j := 0; j < 3; j++ {
 			cell := b[i][j]
 			if cell == Empty {
-				// show numbers 1..9 for empty cells
 				num := i*3 + j + 1
 				sb.WriteString(fmt.Sprintf("%d", num))
 			} else {
@@ -64,7 +63,6 @@ func (b *Board) IsFull() bool {
 }
 
 func (b *Board) Winner() rune {
-	// rows, cols
 	for i := 0; i < 3; i++ {
 		if b[i][0] != Empty && b[i][0] == b[i][1] && b[i][1] == b[i][2] {
 			return b[i][0]
@@ -73,7 +71,6 @@ func (b *Board) Winner() rune {
 			return b[0][i]
 		}
 	}
-	// diagonals
 	if b[0][0] != Empty && b[0][0] == b[1][1] && b[1][1] == b[2][2] {
 		return b[0][0]
 	}
@@ -119,7 +116,6 @@ func availableMoves(b *Board) []int {
 	return moves
 }
 
-// Minimax to make the AI unbeatable.
 func minimax(b *Board, depth int, maximizing bool, ai, human rune) int {
 	winner := b.Winner()
 	if winner == ai {
@@ -165,7 +161,6 @@ func aiBestMove(b *Board, ai, human rune) int {
 	bestScore := -10000
 	bestMove := -1
 	moves := availableMoves(b)
-	// if multiple equal moves, pick randomly among them for variety
 	rand.Shuffle(len(moves), func(i, j int) { moves[i], moves[j] = moves[j], moves[i] })
 	for _, m := range moves {
 		i := m / 3
@@ -184,7 +179,6 @@ func aiBestMove(b *Board, ai, human rune) int {
 func aiMove(b *Board, player rune, opponent rune) {
 	m := aiBestMove(b, player, opponent)
 	if m == -1 {
-		// fallback: pick first available
 		moves := availableMoves(b)
 		if len(moves) == 0 {
 			return
@@ -234,12 +228,11 @@ func main() {
 	rand.Seed(time.Now().UnixNano())
 	reader := bufio.NewReader(os.Stdin)
 
-	// Create board
 	var board Board
 	board.Reset()
 
 	mode := chooseMode(reader)
-	playerTurn := X // X always starts
+	playerTurn := X
 	humanIs := X
 	vsComputer := false
 
@@ -265,7 +258,6 @@ func main() {
 		} else {
 			humanMove(&board, playerTurn, reader)
 		}
-		// swap
 		if playerTurn == X {
 			playerTurn = O
 		} else {
