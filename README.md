@@ -1,5 +1,5 @@
 ## XO — Tic-Tac-Toe (Go)
-A small, well-documented terminal Tic-Tac-Toe (X O) game written in Go.
+A small terminal Tic-Tac-Toe (X O) game written in Go.
 Play 2-player locally or against an unbeatable AI (Minimax). 
 ![url](https://github.com/Mahmoud-kh1/Tic-Tac-Toe/blob/main/imgaes/Screenshot%202025-09-08%20223619.png?raw=true)
 
